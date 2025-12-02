@@ -1,0 +1,35 @@
+{
+  "manifest_version": 2,
+  "name": "Beastify",
+  "version": "1.0",
+
+  "description": "Adds a browser action icon to the toolbar. Click the button to choose a beast. The active tab's body content is then replaced with a picture of the chosen beast. See https://developer.mozilla.org/en-US/Add-ons/WebExtensions/Examples#beastify",
+  "homepage_url": "https://github.com/mdn/webextensions-examples/tree/main/beastify",
+  "icons": {
+    "48": "icons/beasts-48.png"
+  },
+
+  "permissions": ["activeTab"],
+
+  "background": {
+    "scripts": ["background/background-script.js"],
+    "type": "module"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["content_scripts/handle-text.js"]
+    }
+  ],
+
+  "commands": {
+    "highlight": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y"
+      },
+      "description": "toggle highlight"
+    }
+  }
+}
