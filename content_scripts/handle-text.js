@@ -8,11 +8,3 @@ browser.runtime.onMessage.addListener((message) => {
         return Promise.resolve({ response: text });
     }
 })
-
-/**
- * - put selected text in a popup
- * - translate word, allow additional notes
- * - save word and translation for later use
- * - webpage to view words and translations
- * - ability to download csv for quizlet import
- */

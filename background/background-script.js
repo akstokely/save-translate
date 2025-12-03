@@ -9,7 +9,6 @@ function onError(error) {
  *  Listen for commands from shortcut
  */
 browser.commands.onCommand.addListener((command) => {
-    console.log(command);
     if (command === "highlight") {
         //send message to handle-text.js to get selected text
         browser.tabs.query({active: true, currentWindow: true}).then(tabs => {
