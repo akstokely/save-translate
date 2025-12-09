@@ -1,6 +1,5 @@
-import { API_KEY } from "./env.js";
-
 const target_lang = 'FR';
+const URL = 'http://localhost:3000/translate'
 
 /**
  * Log errors to console
@@ -9,19 +8,21 @@ function onError(error) {
     console.error(`Error: ${error}`);
 }
 
-var requestObject = {
-    method: "POST",
-    headers: {
-        "Authorization": 'DeepL-Auth-Key ' + API_KEY,
-        "Content-Type": 'application/json'
-    }
-}
-
 /**
- * Calls DeepL API to translate and return the given word
+ * Send request to backend to perform translation
  */
 function translate(word) {
+    fetch(URL)
+    .then((response) => {
+        console.log(response);
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
 
+        return response.json();
+    })
+    .then((json) => console.log("JSON", json))
+    .catch(onError);
 }
 
 /**
@@ -37,5 +38,6 @@ browser.storage.local.get("currWord")
 
         browser.storage.local.remove("currWord");
     }
+    translate(word);
 })
 .catch(onError);
