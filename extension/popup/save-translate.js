@@ -1,5 +1,5 @@
 const target_lang = 'FR';
-const URL = 'http://localhost:3000/translate'
+const url = new URL("http://localhost:3000/translate");
 
 /**
  * Log errors to console
@@ -12,7 +12,10 @@ function onError(error) {
  * Send request to backend to perform translation
  */
 function translate(word) {
-    fetch(URL)
+    url.search = new URLSearchParams({ test : "test"});
+    console.log(url);
+
+    fetch(url)
     .then((response) => {
         console.log(response);
         if (!response.ok) {
@@ -34,10 +37,8 @@ browser.storage.local.get("currWord")
         const text = document.createTextNode(word.currWord);
         document.getElementById("top").appendChild(text);
         console.log(word.currWord);
-
-
+        translate(word)
         browser.storage.local.remove("currWord");
     }
-    translate(word);
 })
 .catch(onError);
